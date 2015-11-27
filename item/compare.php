@@ -98,7 +98,10 @@ function getItems($ItemIDs) {
 
             $priceByStore[$Store] = $price;			
 		}
-		$priceByStoreByItem[$lastItem] = $priceByStore;
+		
+		if ($lastItem !== null) {
+		  $priceByStoreByItem[$lastItem] = $priceByStore;
+		}
 	}
 	return $priceByStoreByItem;
 }
