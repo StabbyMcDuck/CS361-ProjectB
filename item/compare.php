@@ -135,6 +135,7 @@ function printItems($priceByStoreByItem) {
 	    $priceByStore = $priceByStoreByItem[$Item];
 		$minimumPrice = minimumPrice($priceByStore);
 		
+		echo "<tr>";
 		echo "<td>".$Item->name."</td>";
 		echo "<td>".$Item->brand."</td>";
 		echo "<td>".$Item->size."</td>";
@@ -158,6 +159,8 @@ function printItems($priceByStoreByItem) {
 			
 		    echo ">".$price."</td>";
 		}
+		
+		echo "</tr>";
 	}
 	
 	echo "</tbody>";
