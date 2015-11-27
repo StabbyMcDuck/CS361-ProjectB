@@ -7,11 +7,13 @@ include('../configuration.php');
 
 
 #Connect To Database
-$mysqli = new mysqli($database_configuration['servername'],
-                     $database_configuration['username'],
-                     $database_configuration['password'],
-                     $database_configuration['database']
-                     );
+$mysqli = new mysqli(
+                $database_configuration['servername'],
+                $database_configuration['username'],
+                $database_configuration['password'],
+                $database_configuration['database']
+            );
+
 
 if ($mysqli->connect_errno) {
     echo "Error: Database connection error: " . $mysqli->connect_errno . " - "
