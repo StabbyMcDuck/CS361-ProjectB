@@ -6,7 +6,7 @@
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+ 
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -53,8 +53,8 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <a href="<?php $root_url>index.php">Home</a>
-                        <a href="<?php $root_url>session/destroy.php">Log Out</a>
+                        <a href="<?php $root_url ?>index.php">Home</a>
+                        <a href="<?php $root_url ?>session/destroy.php">Log Out</a>
                     </ul>
                 </nav>
                 
