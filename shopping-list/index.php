@@ -1,5 +1,5 @@
 <?php 
-    include('configuration.php');
+    include('../configuration.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,10 +53,8 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active">
-                            <a href="<?php $root_url>index.php">Home</a>
-                            <a href="<?php $root_url>session/destroy.php">Log Out</a>
-                        </li>
+                        <a href="<?php $root_url>index.php">Home</a>
+                        <a href="<?php $root_url>session/destroy.php">Log Out</a>
                     </ul>
                 </nav>
                 
@@ -64,20 +62,16 @@
             </div> <!-- header clearfix -->
             
             <div class="jumbotron">
-                <h1>Find cheap groceries!</h1>
+                <h1>Shopping List</h1>
                 <p class="lead">
-                    Enter your grocery list and we will show you the price of your items at 2 local grocery store chains, 
-                    including where the best place to buy your groceries is! 
+                    Make a new shopping list:
                 </p>
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-success" href="<?php echo $root_url ?>users/new.php" role="button">Sign up today!</a>
+                    <a class="btn btn-lg btn-success" href="<?php echo $root_url ?>shopping-list/new.php" role="button">New shopping list</a>
                 </p>
                 
-                <p>
-                    <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-warning" href="<?php echo $root_url ?>session/new.php" role="button">Returning users login</a>
-                </p>
+                
             </div> <!-- jumbotron -->
             
                 <footer class="footer">

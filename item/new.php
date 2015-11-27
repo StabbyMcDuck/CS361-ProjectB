@@ -1,5 +1,5 @@
 <?php 
-    include('configuration.php');
+    include('../configuration.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,19 +61,22 @@
                 <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
             </div> <!-- header clearfix -->
             
-            <div class="list-name-entry">
-                <h1>Name list:</h1>
-                <p>Name the list as you would like to have it saved.</p>
+            <div class="jumbotron">
+                <h1>Shopping List</h1>
+                <p class="lead">
+                    Make a new shopping list:
+                </p>
+                <p>
+                    <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
+                    <a class="btn btn-lg btn-success" href="<?php echo $root_url ?>add_items.php" role="button">New shopping list</a>
+                </p>
                 
-                <form>
-                    <div class="form-group">
-                        <label for="list-name">List Name</label>
-                        <input type="list-name" class="form-control" id="list-name" placeholder="List Name">
-                    </div> <!-- form-group -->
+                
+            </div> <!-- jumbotron -->
             
-            <footer class="footer">
+                <footer class="footer">
                 <p>&copy;2015 Oregon State University</p>
             </footer>
         </div> <!-- container -->
     </body>
-</html>
+</html> 

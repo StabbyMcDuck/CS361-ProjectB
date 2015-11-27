@@ -1,3 +1,6 @@
+<?php 
+    include('../configuration.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
