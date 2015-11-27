@@ -133,7 +133,8 @@ function printItems($priceByStoreByItem) {
     
 	foreach($priceByStoreByItem as $Item) {
 	    $priceByStore = $priceByStoreByItem[$Item];
-		$minimum = minimumPrice($priceByStore);
+		$minimumPrice = minimumPrice($priceByStore);
+		
 		echo "<td>".$Item->name."</td>";
 		echo "<td>".$Item->brand."</td>";
 		echo "<td>".$Item->size."</td>";
@@ -145,7 +146,7 @@ function printItems($priceByStoreByItem) {
 		    echo "<td>".$Store->city."</td>";
 		    echo "<td";
 			
-			if ($Item->price == $minimum) {
+			if ($price == $minimumPrice) {
 			    echo " class =\"minimum-price\"";
 			}
 			
