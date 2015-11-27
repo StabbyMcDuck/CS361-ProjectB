@@ -55,12 +55,12 @@ function parseItemIDs() {
 */
 function getItems($ItemIDs) {
 	global $mysqli;
-	$priceByStoreByItem = new SplObjectStorage();
+	$priceByStoreByItem = new PriceByStoreByItem();
 	
 	foreach($ItemIDs as $itemID) {
-		$priceByStore = new SplObjectStorage();
+		$priceByStore = new PriceByStore();
 		// For each item query db to get its price, etc in different stores
-		$tableList = "SELECT cs361_store.city, cs361_store.name as store, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
+		$tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
 			. "FROM cs361_store "
 			. "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
 			. "WHERE cs361_has.itemid = \"{$itemID}\" ";
@@ -88,8 +88,9 @@ function getItems($ItemIDs) {
 			$Item->name = $row["name"];
 			$Item->id = $row["id"];
 			
-			$Store->name = $row["store"];
-			$Store->city = $row["city"];
+			$Store->id = $row["store_id"];
+			$Store->name = $row["store_name"];
+			$Store->city = $row["store_city"];
 			
 			$price = $row["price"];
 
@@ -179,7 +180,7 @@ function minimumPrice($priceByStore) {
 }
 
 function StoreSet($priceByStoreByItem) {
-    $StoreSet = new SplObjectStorage();
+    $StoreSet = new StoreSet();
     
     foreach($priceByStoreByItem as $Item) {
         $priceByStore = $priceByStoreByItem[$Item];
@@ -203,9 +204,26 @@ class Item {
 class Store {
 	public $name = "";
 	public $city = "";
-	
+	public $id = "";
 }
 
+class PriceByStoreByItem extends SPLObjectStorage {
+     public function getHash($Item){
+         return $Item->id;
+     }
+}
+
+class PriceByStore extends SPLObjectStorage {
+    public function getHash($Store) {
+        return $Store->id;
+    }
+}
+
+class StoreSet extends SPLObjectStorage {
+    public function getHash($Store) {
+        return $Store->id;
+    }
+}
 
 // Below is original code from Emmalee, comment it out for now
 
