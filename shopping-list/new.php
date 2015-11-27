@@ -53,8 +53,8 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <a href="<?php $root_url>index.php">Home</a>
-                        <a href="<?php $root_url>session/destroy.php">Log Out</a>
+                        <a href="<?php $root_url ?>index.php">Home</a>
+                        <a href="<?php $root_url ?>session/destroy.php">Log Out</a>
                     </ul>
                 </nav>
                 
@@ -65,7 +65,7 @@
                 <h1>Name list:</h1>
                 <p>Name the list as you would like to have it saved.</p>
                 
-                <form>
+                <form action="">
                     <div class="form-group">
                         <label for="list-name">List Name</label>
                         <input type="list-name" class="form-control" id="list-name" placeholder="List Name">
