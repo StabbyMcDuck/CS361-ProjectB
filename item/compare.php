@@ -141,18 +141,22 @@ function printItems($priceByStoreByItem) {
 		echo "<td>".$Item->unit."</td>";
 		
 		foreach($StoreSet as $Store){
-		    $price = $priceByStore[$Store];
 		    echo "<td>".$Store->name."</td>";
 		    echo "<td>".$Store->city."</td>";
+		    
 		    echo "<td";
-			
-			if ($price == $minimumPrice) {
-			    echo " class =\"minimum-price\"";
+		    
+		    if ($priceByStore->offsetExists($Store)) {
+		        $price = $priceByStore[$Store];
+		    
+			    if ($price == $minimumPrice) {
+			        echo " class =\"minimum-price\"";
+			    }
+			} else {
+			    $price = "N/A";
 			}
 			
-			echo ">";
-			
-			echo $price."</td>";
+		    echo ">".$price."</td>";
 		}
 	}
 	
