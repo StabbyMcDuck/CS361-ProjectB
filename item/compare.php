@@ -41,6 +41,8 @@ function parseItemIDs() {
 	return $ItemIDs;
 }
 
+
+
 /* This function query database for each id in the array
    param Items: array that contains item ids 
    return: a dictionary where the key is each item's itemID, value is an array of 
@@ -53,10 +55,10 @@ function parseItemIDs() {
 */
 function getItems($ItemIDs) {
 	global $mysqli;
-	$priceByStoreByItem = array();
+	$priceByStoreByItem = new SplObjectStorage();
 	
 	foreach($ItemIDs as $itemID) {
-		$priceByStore = array();
+		$priceByStore = new SplObjectStorage();
 		// For each item query db to get its price, etc in different stores
 		$tableList = "SELECT cs361_store.city, cs361_store.name as store, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
 			. "FROM cs361_store "
@@ -113,13 +115,13 @@ function printItems($priceByStoreByItem) {
     
     $StoreSet = StoreSet($priceByStoreByItem);
     
-    foreach($StoreSet as $Store => $present){
+    foreach($StoreSet as $Store){
         echo "<th colspan='3'>Store</th>";
     }
     echo "</tr>";
     
     echo "<tr>";
-    foreach($StoreSet as $Store => $present){
+    foreach($StoreSet as $Store){
         echo "<th>Name</th>";
         echo "<th>City</th>";
         echo "<th>Price</th>";
@@ -127,18 +129,17 @@ function printItems($priceByStoreByItem) {
     echo "</tr>";
     
     echo "</thead>";
-    
     echo "<tbody>";
-	foreach($priceByStoreByItem as $Item => $priceByStore) {
+    
+	foreach($priceByStoreByItem as $Item) {
+	    $priceByStore = $priceByStoreByItem[$Item];
 		$minimum = minimumPrice($priceByStore);
 		echo "<td>".$Item->name."</td>";
 		echo "<td>".$Item->brand."</td>";
 		echo "<td>".$Item->size."</td>";
 		echo "<td>".$Item->unit."</td>";
 		
-		
-		foreach($StoreSet as $Store => $present){
-		    
+		foreach($StoreSet as $Store){
 		    $price = $priceByStore[$Store];
 		    echo "<td>".$Store->name."</td>";
 		    echo "<td>".$Store->city."</td>";
@@ -152,7 +153,8 @@ function printItems($priceByStoreByItem) {
 			
 			echo $price."</td>";
 		}
-	}	
+	}
+	
 	echo "</tbody>";
 	echo "</table>";
 }
@@ -160,7 +162,8 @@ function printItems($priceByStoreByItem) {
 function minimumPrice($priceByStore) {
     $minimum = 0;
     
-    foreach($priceByStore as $Store => $price) {
+    foreach($priceByStore as $Store) {
+        $price = $priceByStore[$Store];
         $minimum = min($minimum, $price);
     }
     
@@ -168,10 +171,12 @@ function minimumPrice($priceByStore) {
 }
 
 function StoreSet($priceByStoreByItem) {
-    $StoreSet = array();
+    $StoreSet = new SplObjectStorage();
     
-    foreach($priceByStoreByItem as $Item => $priceByStore) {
-        foreach($priceByStore as $Store => $price) {
+    foreach($priceByStoreByItem as $Item) {
+        $priceByStore = $priceByStoreByItem[$Item];
+        
+        foreach($priceByStore as $Store) {
             $StoreSet[$Store] = true;
         }
     }
