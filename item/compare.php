@@ -209,19 +209,19 @@ class Store {
 
 class PriceByStoreByItem extends SPLObjectStorage {
      public function getHash($Item){
-         return $Item->id;
+         return strval($Item->id);
      }
 }
 
 class PriceByStore extends SPLObjectStorage {
     public function getHash($Store) {
-        return $Store->id;
+        return strval($Store->id);
     }
 }
 
 class StoreSet extends SPLObjectStorage {
     public function getHash($Store) {
-        return $Store->id;
+        return strval($Store->id);
     }
 }
 
