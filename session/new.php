@@ -29,7 +29,7 @@
                     $('#form-errors').html(xhr.responseJSON.message);
                 },
                 success: function(responseJSON, statusText, xhr, formElement) {
-                    $(location).attr('href','<?php echo $root_url ?>shopping_items/list-index.php');
+                    $(location).attr('href','<?php echo $root_url ?>shopping-list/index.php');
                 }
             };
             $('#form').ajaxForm(options);
