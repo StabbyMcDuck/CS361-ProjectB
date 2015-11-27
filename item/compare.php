@@ -5,16 +5,13 @@ $input = "valid";
 
 include('../configuration.php');
 
-$dbhost = 'oniddb.cws.oregonstate.edu';
-$dbname = 'zengx-db';
-$dbpass = 'qWXPWG1wbhOLVCAG';
-$dbuser = 'zengx-db';
 
 #Connect To Database
 $mysqli = new mysqli($database_configuration['servername'],
-                     $database_configuration['database'],
+                     $database_configuration['username'],
                      $database_configuration['password'],
-                     $database_configuration['username']);
+                     $database_configuration['database']
+                     );
 
 if ($mysqli->connect_errno) {
     echo "Error: Database connection error: " . $mysqli->connect_errno . " - "
