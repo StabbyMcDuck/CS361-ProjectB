@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+    if(!isset($_SESSION['id'])){
+        //redirect them back to login page
+        header("Location: ../session/new.php"); /* Redirect browser */
+        exit();
+    }
     error_reporting(E_ALL);
     ini_set('display_errors', 'ON');
     include('../configuration.php');
