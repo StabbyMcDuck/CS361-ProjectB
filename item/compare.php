@@ -77,20 +77,12 @@ if ($mysqli->connect_errno) {
     
     <body>
         <div class="container">
-            <div class="header clearfix">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <a href="<?= $root_url ?>index.php">Home</a>
-                        <a href="<?= $root_url ?>session/destroy.php">Log Out</a>
-                    </ul>
-                </nav>
-                
-                <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
-            </div> <!-- header clearfix -->
+            <?php
+            include("../header.php");
+            printHeader();
+            ?>
 
-
-
- <div class="jumbotron">
+        <div class="jumbotron">
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');

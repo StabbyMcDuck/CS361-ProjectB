@@ -50,17 +50,10 @@
     
     <body>
         <div class="container">
-            <div class="header clearfix">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active">
-                            <a href="#">Home</a>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
-            </div> <!-- header clearfix -->
+            <?php
+            include("header.php");
+            printHeader("index.php");
+            ?>
             
             <div class="jumbotron">
                 <h1>Find cheap groceries!</h1>

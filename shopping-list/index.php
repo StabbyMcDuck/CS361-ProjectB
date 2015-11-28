@@ -57,17 +57,11 @@
     
     <body>
         <div class="container">
-            <div class="header clearfix">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <a href="<?= $root_url ?>index.php">Home</a>
-                        <a href="<?= $root_url ?>session/destroy.php">Log Out</a>
-                    </ul>
-                </nav>
-                
-                <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
-            </div> <!-- header clearfix -->
-            
+            <?php
+            include("../header.php");
+            printHeader();
+            ?>
+
             <div class="jumbotron">
                 <h1>Shopping List</h1>
                 <p class="lead">
