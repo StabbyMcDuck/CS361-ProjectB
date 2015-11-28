@@ -13,6 +13,9 @@ function printHeader($active = null) {
              ?>>
                 <a href="<?= $root_url ?>">Home</a>
             </li>
+            <li role="presentation">
+                <a href="http://example.com">Example Link</a>
+            </li>
             <?php
     session_start();
     if (isset($_SESSION['id'])) {
