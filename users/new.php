@@ -55,7 +55,6 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
         
-  </div>
         
         <button class="btn btn-lg btn-primary" type="submit">Create user</button>
 
