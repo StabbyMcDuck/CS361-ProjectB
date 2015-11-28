@@ -49,9 +49,9 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
         <label for="inputPassword" class="sr-only">Password</label>
-        <br>
-        <br>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
+        <br>
+        <br>
         <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
         <p id="form-errors">
 
