@@ -100,7 +100,11 @@ function main() {
 /* This function will parse item ids in URL and return values of ids in an array
 */
 function parseItemIDs() {
-	$ItemIDs = $_GET['itemID'];
+    if (isset($_GET['itemID'])) {
+        $ItemIDs = $_GET['itemID'];
+    } else {
+        $ItemIDs = array();
+    }
 	return $ItemIDs;
 }
 
