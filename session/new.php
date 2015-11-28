@@ -41,8 +41,8 @@
 
 <div class="container">
     <?php
-        include("../header.php");
-        printHeader();
+           include("../header.php");
+            printHeader("index.php");
     ?>
     <form class="form-signin" action="create.php" id="form" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>

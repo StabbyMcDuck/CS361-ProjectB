@@ -57,7 +57,7 @@
         
   </div>
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create user</button>
+        <button class="btn btn-lg btn-primary" type="submit">Create user</button>
 
           <p id="form-errors">
 
