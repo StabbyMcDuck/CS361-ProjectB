@@ -78,8 +78,8 @@ if ($mysqli->connect_errno) {
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <a href="<?php $root_url ?>index.php">Home</a>
-                        <a href="<?php $root_url ?>session/destroy.php">Log Out</a>
+                        <a href="<?= $root_url ?>index.php">Home</a>
+                        <a href="<?= $root_url ?>session/destroy.php">Log Out</a>
                     </ul>
                 </nav>
                 
