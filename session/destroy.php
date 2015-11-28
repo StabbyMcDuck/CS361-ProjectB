@@ -11,6 +11,6 @@ session_destroy();
 
 require_once('../configuration.php');
 
-header("Location: $root_url");
+header("Location: $root_url/session/new.php");
 
 ?>
