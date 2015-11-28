@@ -6,6 +6,6 @@ session_unset();
 
 session_destroy();
 
-header('Location: $root_url');
+header("Location: $root_url");
 
 ?>
