@@ -51,11 +51,6 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
         
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
   </div>
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create user</button>
