@@ -53,8 +53,8 @@ if ($mysqli->connect_errno) {
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         
-        <!-- Custom styles for this template -->
-        <link href="jumbotron-narrow.css" rel="stylesheet">
+        <!-- Custom styles for this template 
+        <link href="jumbotron-narrow.css" rel="stylesheet">-->
         
         <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
             .en-markup-crop-options {
@@ -174,7 +174,7 @@ function getItems($ItemIDs) {
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
 */
 function printItems($priceByStoreByItem) {
-    echo "<table>";
+    echo "<table class=\"table table-striped\">";
     echo "<thead>";
     echo "<tr>";
     echo "<th rowspan='2'>Name</th>";
