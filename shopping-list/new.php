@@ -111,6 +111,7 @@ while ($row = $result->fetch_assoc()) {
 ?>
                      </select>
                     </div> <!-- form-group -->
+                    <button type="submit" class="btn btn-success">Price Compare</button>
             </form>
             <footer class="footer">
                 <p>&copy;2015 Oregon State University</p>
