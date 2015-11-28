@@ -40,7 +40,10 @@
 <body>
 
 <div class="container">
-
+    <?php
+        include("../header.php");
+        printHeader();
+    ?>
     <form class="form-signin" action="create.php" id="form" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
