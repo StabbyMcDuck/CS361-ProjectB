@@ -15,7 +15,7 @@ function printHeader($active = null) {
             </li>
             <?php
     session_start();
-    if (!isset($_SESSION['id'])) {
+    if (isset($_SESSION['id'])) {
             ?>
             <li role="presentaton">
                 <a href="<?= $root_url ?>session/destroy.php">Log Out</a>
