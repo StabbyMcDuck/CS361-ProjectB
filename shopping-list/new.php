@@ -84,7 +84,6 @@ if ($mysqli->connect_errno) {
                 <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
                     <div class="form-group">
                         <div class="col-lg-12">
-                        <select class="selectpicker" multiple name="itemID[]">
                             <?php
                             $itemQuery = "SELECT id, brand, name, size, unit " .
                                          "FROM cs361_item " .
@@ -102,17 +101,18 @@ if ($mysqli->connect_errno) {
                             $result = $statement->get_result();
                             
                             while ($row = $result->fetch_assoc()) {
-                                ?>
-                                <option value="<?php echo $row["id"] ?>">
-                                    <?php echo $row["brand"]." ".$row["name"]." ".$row["size"]." ".$row["unit"] ?>
-                                </option>
-                                <?php
-                            }
-                            
                             ?>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="itemID[]" type="checkbox" value="<?php echo $row["id"] ?>">
+                                    <?php echo $row["brand"]." ".$row["name"]." ".$row["size"]." ".$row["unit"] ?>
+                                </label>
                             </div>
-                     </select>
-                    </div> <!-- form-group -->
+                            <?php
+                            }
+                            ?>
+                        </div>
+                     </div> <!-- form-group -->
                     <button type="submit" class="btn btn-success">Price Compare</button>
             </form>
             <footer class="footer">
