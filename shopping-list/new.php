@@ -1,5 +1,23 @@
-<?php 
+<?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'ON');
     include('../configuration.php');
+    
+    #Connect To Database
+$mysqli = new mysqli(
+                $database_configuration['servername'],
+                $database_configuration['username'],
+                $database_configuration['password'],
+                $database_configuration['database']
+            );
+
+
+if ($mysqli->connect_errno) {
+    echo "Error: Database connection error: " . $mysqli->connect_errno . " - "
+    . $mysqli->connect_error;
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,16 +79,39 @@
                 <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
             </div> <!-- header clearfix -->
             
-            <div class="list-name-entry">
-                <h1>Name list:</h1>
-                <p>Name the list as you would like to have it saved.</p>
+            <div class="item-entry">
                 
-                <form action="">
+                <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
                     <div class="form-group">
-                        <label for="list-name">List Name</label>
-                        <input type="list-name" class="form-control" id="list-name" placeholder="List Name">
+                        <select class="selectpicker" multiple name="itemID[]">
+<?php
+$itemQuery = "SELECT id, brand, name, size, unit " .
+             "FROM cs361_item " .
+             "ORDER BY brand, name, size, unit";
+             
+if (!($statement = $mysqli->prepare($itemQuery))) {
+    echo "Error: Prepare failed: (" . $statement->errno . ") " . $statement->error;
+    exit;
+}
+
+if (!$statement->execute()) {
+    echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+
+$result = $statement->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    ?>
+    <option value="<?php echo $row["id"] ?>">
+        <?php echo $row["brand"]." ".$row["name"]." ".$row["size"]." ".$row["unit"] ?>
+    </option>
+    <?php
+}
+
+?>
+                     </select>
                     </div> <!-- form-group -->
-            
+            </form>
             <footer class="footer">
                 <p>&copy;2015 Oregon State University</p>
             </footer>
