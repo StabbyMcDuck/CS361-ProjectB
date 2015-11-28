@@ -41,6 +41,10 @@
   <body>
 
     <div class="container">
+      <?php
+        include("../header.php");
+        printHeader();
+      ?>
 
       <form action="create.php" class="form-signin" id="form" method="post">
         <h2 class="form-signin-heading">Create user</h2>
