@@ -6,6 +6,6 @@ session_unset();
 
 session_destroy();
 
-header('Location: new.php');
+header('Location: $root_url');
 
 ?>
