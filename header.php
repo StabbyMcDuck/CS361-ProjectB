@@ -17,7 +17,10 @@ function printHeader($active = null) {
                 <a href="http://example.com">Example Link</a>
             </li>
             <?php
-    session_start();
+    if(session_status() == PHP_SESSION_NONE){            
+        session_start();
+    }
+    
     if (isset($_SESSION['id'])) {
             ?>
             <li role="presentaton">
