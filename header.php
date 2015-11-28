@@ -11,7 +11,7 @@ function printHeader($active = null) {
         echo " class =\"active\"";
     }
              ?>>
-                <a href="<?php echo $root_url ?>">Home</a>
+                <a href="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/">Home</a>
             </li>
             <li role="presentation">
                 <a href="http://example.com">Example Link</a>
@@ -24,7 +24,7 @@ function printHeader($active = null) {
     if (isset($_SESSION['id'])) {
             ?>
             <li role="presentaton">
-                <a href="<?php echo $root_url ?>session/destroy.php">Log Out</a>
+                <a href="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/session/destroy.php">Log Out</a>
             </li>
             <?php
     }
