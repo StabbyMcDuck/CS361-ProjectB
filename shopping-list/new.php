@@ -83,32 +83,34 @@ if ($mysqli->connect_errno) {
                 
                 <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
                     <div class="form-group">
+                        <div class="col-lg-12">
                         <select class="selectpicker" multiple name="itemID[]">
-<?php
-$itemQuery = "SELECT id, brand, name, size, unit " .
-             "FROM cs361_item " .
-             "ORDER BY brand, name, size, unit";
-             
-if (!($statement = $mysqli->prepare($itemQuery))) {
-    echo "Error: Prepare failed: (" . $statement->errno . ") " . $statement->error;
-    exit;
-}
-
-if (!$statement->execute()) {
-    echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
-}
-
-$result = $statement->get_result();
-
-while ($row = $result->fetch_assoc()) {
-    ?>
-    <option value="<?php echo $row["id"] ?>">
-        <?php echo $row["brand"]." ".$row["name"]." ".$row["size"]." ".$row["unit"] ?>
-    </option>
-    <?php
-}
-
-?>
+                            <?php
+                            $itemQuery = "SELECT id, brand, name, size, unit " .
+                                         "FROM cs361_item " .
+                                         "ORDER BY brand, name, size, unit";
+                                         
+                            if (!($statement = $mysqli->prepare($itemQuery))) {
+                                echo "Error: Prepare failed: (" . $statement->errno . ") " . $statement->error;
+                                exit;
+                            }
+                            
+                            if (!$statement->execute()) {
+                                echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+                            }
+                            
+                            $result = $statement->get_result();
+                            
+                            while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <option value="<?php echo $row["id"] ?>">
+                                    <?php echo $row["brand"]." ".$row["name"]." ".$row["size"]." ".$row["unit"] ?>
+                                </option>
+                                <?php
+                            }
+                            
+                            ?>
+                            </div>
                      </select>
                     </div> <!-- form-group -->
                     <button type="submit" class="btn btn-success">Price Compare</button>

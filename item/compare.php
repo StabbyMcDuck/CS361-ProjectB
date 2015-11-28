@@ -106,6 +106,21 @@ function getItems($ItemIDs) {
 	return $priceByStoreByItem;
 }
 
+//////////////////////////////////////////////////////////////////////////////
+echo "<div class=\"header clearfix\">";
+echo "<nav>";
+echo "<ul class=\"nav nav-pills pull-right\">";
+echo "<a href=\"<?php \$root_url ?>index.php\">Home</a>";
+echo "<a href=\"<?php \$root_url ?>session/destroy.php\">Log Out</a>";
+echo "</ul>";
+echo "</nav>";
+echo "<h2 class=\"text-muted\">Grocery Shopper Price Chopper</h2>";
+echo "</div> <!-- header clearfix -->";
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
 */
 function printItems($priceByStoreByItem) {

@@ -6165,3 +6165,8 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+.selectpicker {
+  height: 100%;
+  width: 100%;
+}

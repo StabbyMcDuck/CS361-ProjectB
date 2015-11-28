@@ -69,6 +69,7 @@
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
                     <a class="btn btn-lg btn-success" href="<?php echo $root_url ?>shopping-list/new.php" role="button">New shopping list</a>
+                    <a class="btn btn-lg btn-warning" href="<?php echo $root_url ?>"
                 </p>
                 
                 
