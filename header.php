@@ -13,6 +13,16 @@ function printHeader($active = null) {
              ?>>
                 <a href="<?= $root_url ?>">Home</a>
             </li>
+            <?php
+    session_start();
+    if (!isset($_SESSION['id'])) {
+            ?>
+            <li role="presentaton">
+                <a href="<?= $root_url ?>session/destroy.php">Log Out</a>
+            </li>
+            <?php
+    }
+            ?>
         </ul>
     </nav>
                 
