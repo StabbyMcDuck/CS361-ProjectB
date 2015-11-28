@@ -82,7 +82,7 @@ if ($mysqli->connect_errno) {
             printHeader();
             ?>
 
-        <div class="jumbotron">
+        <div>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
