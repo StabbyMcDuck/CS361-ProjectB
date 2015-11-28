@@ -14,7 +14,7 @@ function printHeader($active = null) {
                 <a href="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/">Home</a>
             </li>
             <li role="presentation">
-                <a href="http://example.com">Example Link</a>
+                <a href="http://web.engr.oregonstate.edu/~collikyl/Test">Add Grocery Items & Prices</a>
             </li>
             <?php
     if(session_status() == PHP_SESSION_NONE){            
