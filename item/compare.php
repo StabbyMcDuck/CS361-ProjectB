@@ -21,6 +21,69 @@ if ($mysqli->connect_errno) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+ 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <title>Grocery Shopper Price Chopper</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        
+        <!-- Custom styles for this template -->
+        <link href="jumbotron-narrow.css" rel="stylesheet">
+        
+        <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+            .en-markup-crop-options {
+            top: 18px !important;
+            left: 50% !important;
+            margin-left: -100px !important;
+            width: 200px !important;
+            border: 2px rgba(255,255,255,.38) solid !important;
+            border-radius: 4px !important;
+            }
+
+            .en-markup-crop-options div div:first-of-type {
+                margin-left: 0px !important;
+            }
+            
+        </style> <!-- end style-1-cropbar -->
+        
+    </head>
+
+    
+    <body>
+        <div class="container">
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <a href="<?php $root_url ?>index.php">Home</a>
+                        <a href="<?php $root_url ?>session/destroy.php">Log Out</a>
+                    </ul>
+                </nav>
+                
+                <h2 class="text-muted">Grocery Shopper Price Chopper</h2>
+            </div> <!-- header clearfix -->
+
+
+
+ <div class="jumbotron">
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
@@ -40,7 +103,6 @@ function parseItemIDs() {
 	$ItemIDs = $_GET['itemID'];
 	return $ItemIDs;
 }
-
 
 
 /* This function query database for each id in the array
@@ -105,21 +167,6 @@ function getItems($ItemIDs) {
 	}
 	return $priceByStoreByItem;
 }
-
-//////////////////////////////////////////////////////////////////////////////
-echo "<div class=\"header clearfix\">";
-echo "<nav>";
-echo "<ul class=\"nav nav-pills pull-right\">";
-echo "<a href=\"<?php \$root_url ?>index.php\">Home</a>";
-echo "<a href=\"<?php \$root_url ?>session/destroy.php\">Log Out</a>";
-echo "</ul>";
-echo "</nav>";
-echo "<h2 class=\"text-muted\">Grocery Shopper Price Chopper</h2>";
-echo "</div> <!-- header clearfix -->";
-
-
-
-//////////////////////////////////////////////////////////////////////////////
 
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
 */
@@ -242,7 +289,18 @@ class StoreSet extends SPLObjectStorage {
         return strval($Store->id);
     }
 }
-
+?>
+<!--/////////////////////////////////////////////////////////////////////////-->
+</div> <!-- jumbotron -->
+            
+                <footer class="footer">
+                <p>&copy;2015 Oregon State University</p>
+            </footer>
+        </div> <!-- container -->
+    </body>
+</html> 
+<!--/////////////////////////////////////////////////////////////////////////-->
+<!--
 // Below is original code from Emmalee, comment it out for now
 
 //$City = $_GET['City'];
@@ -294,7 +352,7 @@ if (!$stmt->bind_result($tabCity, $tabStore, $tabAddress, $tabItem, $tabBrand, $
     <body>
         <div>
             </div>
-            <!-- HTML to create a table with 7 columns -->
+            <!-- HTML to create a table with 7 columns
             <table border="1">
                 <tbody> 
                 <tr>
@@ -311,7 +369,7 @@ if (!$stmt->bind_result($tabCity, $tabStore, $tabAddress, $tabItem, $tabBrand, $
                     <td>Price</td>
                 </tr>
 
-                <?php
+                php
                 error_reporting(E_ALL);
                 ini_set('display_errors', 'ON');
 
@@ -329,4 +387,4 @@ if (!$stmt->bind_result($tabCity, $tabStore, $tabAddress, $tabItem, $tabBrand, $
 </body>
 </html>
 
-*/
+-->
