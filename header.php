@@ -11,7 +11,7 @@ function printHeader($active = null) {
         echo " class =\"active\"";
     }
              ?>>
-                <a href="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/">Home</a>
+                <a href="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/shopping-list/index.php">Shopping List</a>
             </li>
             <li role="presentation">
                 <a href="http://web.engr.oregonstate.edu/~collikyl/Test">Add Grocery Items & Prices</a>
