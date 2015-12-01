@@ -39,6 +39,40 @@
   </head>
 
   <body>
+<!-- JS for log in errors -->
+<script language="javascript">
+        var flag=0;
+        function username()
+        {
+            user=loginform.username.value;
+            if(user=="")
+            {
+                document.getElementById("error0").innerHTML="Enter UserID";
+                flag=1;
+            }
+        }   
+        function password()
+        {
+            pass=loginform.password.value;
+            if(pass=="")
+            {
+                document.getElementById("error1").innerHTML="Enter password";   
+                flag=1;
+            }
+        }
+
+        function check(form)
+        {
+            flag=0;
+            username();
+            password();
+            if(flag==1)
+                return false;
+            else
+                return true;
+        }
+
+    </script>
 
     <div class="container">
       <?php
@@ -50,9 +84,11 @@
         <h2 class="form-signin-heading">Create user</h2>
         
         <label for="inputEmail" class="sr-only">Email address</label>
+        <div id="error0"></div>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
         
         <label for="inputPassword" class="sr-only">Password</label>
+        <div id="error1"></div>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
         
         <br>
