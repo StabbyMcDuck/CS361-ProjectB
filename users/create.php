@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             echo json_encode($response_array);
         }else{
-            include '../../configuration.php';
+            include '../configuration.php';
             // Create connection
             $connection = new mysqli(
                 $database_configuration['servername'],
