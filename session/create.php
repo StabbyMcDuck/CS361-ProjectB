@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Content-type: application/json');
                 $response_array = array(
                     'status' => 'error',
-                    'message' => 'Try again later'
+                    'message' => 'Try again later 1'
                 );
                 echo json_encode($response_array);
                 exit;
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Content-type: application/json');
                 $response_array = array(
                     'status' => 'error',
-                    'message' => 'Try again later'
+                    'message' => 'Try again later 2'
                 );
                 echo json_encode($response_array);
                 exit;
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Content-type: application/json');
                     $response_array = array(
                         'status' => 'error',
-                        'message' => 'Try again later'
+                        'message' => 'Try again later 3'
                     );
                     echo json_encode($response_array);
                     exit;
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Content-type: application/json');
                 $response_array = array(
                     'status' => 'error',
-                    'message' => 'Try again later'
+                    'message' => 'Try again later 4'
                 );
                 echo json_encode($response_array);
                 exit;
