@@ -1,7 +1,3 @@
-<?php 
-    include('../configuration.php');
-?>
-
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Content-type: application/json');
                 $response_array = array(
                     'status' => 'error',
-                    'message' => 'Try again later'
+                    'message' => 'Email and password do not match.'
                 );
                 echo json_encode($response_array);
                 exit;
