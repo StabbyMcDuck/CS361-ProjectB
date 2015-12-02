@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            require '../../password_compat.php';
+            require '../password_compat.php';
 
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            require '../../password_compat.php';
+            require '../password_compat.php';
 
             while($statement->fetch()){
                 if(password_verify($password, $out_password)){
