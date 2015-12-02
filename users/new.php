@@ -73,24 +73,29 @@
         }
 
     </script>
+    
+<?php
 
-<script type="text/javascript">
-$(document).on('click', '.formsubmitbutton', function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: $(".form").attr('action'),
-        data: $(".form").serialize(),
-        success: function(response) {
-             if (response === "success") {
-                  window.reload;
-             } else {
-                   alert("invalid username/password.  Please try again");
-             }
-        }
-    });
-});
-</script>
+/*****
+* Query database to retrieve stored 
+* username and password then check validity below
+*****/
+
+$Query_username = "something1";
+$Query_pswd = "something2";
+
+$userName = $_POST['userName'];
+$pswd = $_POST['pswd'];
+
+if(($userName == $Query_username) && ($pswd == $Query_pswd)) {
+
+  echo "OK, logged in, good to go.";
+} else {
+  $message = "Username and/or Password incorrect.\\nTry again.";
+  echo "<script type='text/javascript'>alert('$message');</script>";
+}
+
+?>
 
     <div class="container">
       <?php
