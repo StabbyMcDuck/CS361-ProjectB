@@ -74,7 +74,9 @@ if ($mysqli->connect_errno) {
         
         <style>
 			.minimum-price {
-				color: #3BCC00;	
+				background-color: #009407;
+        		color: #FFFFFF;
+       		 	padding: 5px;	
 			}
 		</style>
         
