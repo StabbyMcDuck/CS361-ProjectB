@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode($response_array);
                 exit;
             }
-            if (!($statement = $connection->prepare("INSERT INTO users(email, password) VALUES(?,?) "))) {
+            if (!($statement = $connection->prepare("INSERT INTO 361_users(email, password) VALUES(?,?) "))) {
                 http_response_code(500);
                 header('Content-type: application/json');
                 $response_array = array(
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Content-type: application/json');
                 $response_array = array(
                     'status' => 'error',
-                    'message' => 'Try again later'
+                    'message' => 'Try again later 3'
                 );
                 echo json_encode($response_array);
                 exit;
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Content-type: application/json');
                     $response_array = array(
                         'status' => 'error',
-                        'message' => 'Try again later'
+                        'message' => 'Try again later 4'
                     );
                     echo json_encode($response_array);
                     exit;
