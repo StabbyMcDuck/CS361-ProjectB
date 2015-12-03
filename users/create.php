@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode($response_array);
                 exit;
             }
-            if (!($statement = $connection->prepare("INSERT INTO users(email, password) VALUES(?,?) "))) {
+            if (!($statement = $connection->prepare("INSERT INTO cs361_users(email, password) VALUES(?,?) "))) {
                 http_response_code(500);
                 header('Content-type: application/json');
                 $response_array = array(
