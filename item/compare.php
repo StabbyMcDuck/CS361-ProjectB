@@ -72,6 +72,14 @@ if ($mysqli->connect_errno) {
             
         </style> <!-- end style-1-cropbar -->
         
+        <style>
+			.minimum-price {
+				background-color: #009407;
+        		color: #FFFFFF;
+       		 	padding: 5px;	
+			}
+		</style>
+        
     </head>
 
     
