@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            if (!($statement = $connection->prepare("SELECT id, password FROM users WHERE email = ? "))) {
+            if (!($statement = $connection->prepare("SELECT id, password FROM cs361_users WHERE email = ? "))) {
+                
                 http_response_code(500);
                 header('Content-type: application/json');
                 $response_array = array(
@@ -128,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Content-type: application/json');
                     $response_array = array(
                         'status' => 'error',
-                        'message' => 'Unauthorized'
+                        'message' => 'Username and password do not match.  Please try again!'
                     );
                     echo json_encode($response_array);
                     $statement->close();
