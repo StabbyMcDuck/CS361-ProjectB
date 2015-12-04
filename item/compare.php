@@ -222,6 +222,7 @@ function printItems($priceByStoreByItem) {
 		    echo "<td>".$Store->name."</td>";
 		    echo "<td>".$Store->city."</td>";
 		    
+		    echo "<!--".$minimumPrice."-->";
 		    echo "<td";
 		    
 		    if ($priceByStore->offsetExists($Store)) {
