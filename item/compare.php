@@ -238,7 +238,7 @@ function printItems($priceByStoreByItem) {
 }
 
 function minimumPrice($priceByStore) {
-    $minimum = 0;
+    $minimum = 1000000000;
     
     foreach($priceByStore as $Store) {
         $price = $priceByStore[$Store];
