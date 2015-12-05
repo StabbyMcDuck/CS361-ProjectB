@@ -157,57 +157,114 @@ function parseItemIDs() {
       name: bread, store: QFC, ....
 */
 function getItems($ItemIDs) {
-	global $mysqli;
-	$priceByStoreByItem = new PriceByStoreByItem();
-	
-	foreach($ItemIDs as $itemID) {
-		$priceByStore = new PriceByStore();
-		// For each item query db to get its price, etc in different stores
-		$tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
-			. "FROM cs361_store "
-			. "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
-			. "WHERE cs361_has.itemid = \"{$itemID}\" ";
-		if (!($stmt = $mysqli->prepare($tableList))) {
-			echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
-		}
-		if (!$stmt->execute()) {
-			echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
-		}
-		
-		// Create item object with values from db and add it to the array
-		$result = $stmt->get_result();
-		
-		$lastItem = null;
-		
+  if(!isset($_POST['sorted']) || $_POST['sorted'] == "All Movies") {
+    global $mysqli;
+    $priceByStoreByItem = new PriceByStoreByItem();
+
+    foreach($ItemIDs as $itemID) {
+      $priceByStore = new PriceByStore();
+      // For each item query db to get its price, etc in different stores
+      $tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
+        . "FROM cs361_store "
+        . "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
+        . "WHERE cs361_has.itemid = \"{$itemID}\" ";
+      if (!($stmt = $mysqli->prepare($tableList))) {
+        echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
+      }
+      if (!$stmt->execute()) {
+        echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+      }
+
+      // Create item object with values from db and add it to the array
+      $result = $stmt->get_result();
+
+      $lastItem = null;
+
+
+      while($row = $result->fetch_assoc()) //get it one by one
+      {
+        $Item = new Item();
+
+        $Store = new Store();
+
+        $Item->brand = $row["brand"];
+        $Item->size = $row["size"];
+        $Item->unit = $row["unit"];
+        $Item->name = $row["name"];
+        $Item->id = $row["id"];
+
+        $Store->id = $row["store_id"];
+        $Store->name = $row["store_name"];
+        $Store->city = $row["store_city"];
+
+        $price = $row["price"];
+
+        $lastItem = $Item;
+
+              $priceByStore[$Store] = $price;			
+      }
+
+      if ($lastItem !== null) {
+        $priceByStoreByItem[$lastItem] = $priceByStore;
+      }
+    }
+    return $priceByStoreByItem;
+    } else {
+          global $mysqli;
+    $priceByStoreByItem = new PriceByStoreByItem();
+
+    foreach($ItemIDs as $itemID) {
+      $priceByStore = new PriceByStore();
+      // For each item query db to get its price, etc in different stores
+      $tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
+        . "FROM cs361_store "
+        . "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
+        . "WHERE cs361_has.itemid = \"{$itemID}\" ";
+      if (!($stmt = $mysqli->prepare($tableList))) {
+        echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
+      }
+      if (!$stmt->execute()) {
+        echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+      }
+
+      // Create item object with values from db and add it to the array
+      $result = $stmt->get_result();
+
+      $lastItem = null;
+
+
+      while($row = $result->fetch_assoc()) //get it one by one
+      {
+        if($row["store_city"] == $_POST['sorted']) { //Figure out why this isnt working
+          $Item = new Item();
+
+          $Store = new Store();
+
+          $Item->brand = $row["brand"];
+          $Item->size = $row["size"];
+          $Item->unit = $row["unit"];
+          $Item->name = $row["name"];
+          $Item->id = $row["id"];
+
+          $Store->id = $row["store_id"];
+          $Store->name = $row["store_name"];
+          $Store->city = $row["store_city"];
+
+          $price = $row["price"];
+
+          $lastItem = $Item;
+
+                $priceByStore[$Store] = $price;			
+        }
+      }
+
+      if ($lastItem !== null) {
+        $priceByStoreByItem[$lastItem] = $priceByStore;
+      }
+    }
+    return $priceByStoreByItem;
     
-		while($row = $result->fetch_assoc() && ($row["store_city"] == $location || $location == "All Cities")) //get it one by one
-		{
-			$Item = new Item();
-			
-			$Store = new Store();
-			
-			$Item->brand = $row["brand"];
-			$Item->size = $row["size"];
-			$Item->unit = $row["unit"];
-			$Item->name = $row["name"];
-			$Item->id = $row["id"];
-			
-			$Store->id = $row["store_id"];
-			$Store->name = $row["store_name"];
-			$Store->city = $row["store_city"];
-			
-			$price = $row["price"];
-
-			$lastItem = $Item;
-
-            $priceByStore[$Store] = $price;			
-		}
-		
-		if ($lastItem !== null) {
-		  $priceByStoreByItem[$lastItem] = $priceByStore;
-		}
-	}
-	return $priceByStoreByItem;
+    }
 }
 
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
