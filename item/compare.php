@@ -30,14 +30,6 @@ if ($mysqli->connect_errno) {
 
 <!DOCTYPE html>
 <html lang="en">
-    
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
- 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +39,13 @@ if ($mysqli->connect_errno) {
         <meta name="author" content="">
         
         <title>Grocery Shopper Price Chopper</title>
-        
+          
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         
@@ -72,6 +70,13 @@ if ($mysqli->connect_errno) {
             }
             
         </style> <!-- end style-1-cropbar -->
+
+        <style>
+            .minimum-price {
+              background-color: green;
+              color: white;
+            }
+	</style>
 
     </head>
 
@@ -311,7 +316,6 @@ function printItems($priceByStoreByItem) {
 		    echo "<td>".$Store->name."</td>";
 		    echo "<td>".$Store->city."</td>";
 		    
-		    echo "<!--".$minimumPrice."-->";
 		    echo "<td";
 		    
 		    if ($priceByStore->offsetExists($Store)) {
