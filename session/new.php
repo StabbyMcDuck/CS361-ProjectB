@@ -32,7 +32,7 @@
             $('#form').ajaxForm(options);
         });
         ?>
-    </script>
+    
 </head>
 
 <body>
