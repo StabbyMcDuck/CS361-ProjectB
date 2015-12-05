@@ -88,12 +88,8 @@ if ($mysqli->connect_errno) {
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-main();
-
-
-function main() {
   
-      $City;
+      $location;
         
       echo "<div class=\"user-button\">";
       echo "<form id=\"sorter\" method=\"post\" action=\"compare.php\">";
@@ -102,23 +98,23 @@ function main() {
       $cty = "SELECT city FROM cs361_store WHERE id > -1 ORDER BY city";
       $stmt->prepare($cty);
       $stmt->execute();
-      $stmt->bind_result($City);
+      $stmt->bind_result($location);
 
       $array = array(100);
       $cityCount = 0;
       $include;
-      echo "<option value=\"All Stores\">All Stores</option>";
+      echo "<option value=\"All Cities\">All Cities</option>";
       while($stmt->fetch()) {
         $include = TRUE;
         for($i = 0; $i < count($array); $i++) {
-          if($City == $array[$i]) {
+          if($location == $array[$i]) {
             $include = FALSE;
           }
         }
-        if($include == TRUE && $City != "") {
-          $array[$cityCount] = $City;
+        if($include == TRUE && $location != "") {
+          $array[$cityCount] = $location;
           $cityCount++;
-          echo "<option value=\"" . $City . "\">" . $City . "</option>";
+          echo "<option value=\"" . $location . "\">" . $location . "</option>";
         }
       }
       echo "</select>";
@@ -127,6 +123,11 @@ function main() {
       echo "</div>";
 
       $stmt->close();
+          
+main();
+
+
+function main() {
   
 	$ItemIDs= parseItemIDs(); // Get items passed from HTTP GET as an array
 	$priceByStoreByItem = getItems($ItemIDs); // Query database to get prices at different stores for each item
@@ -179,7 +180,7 @@ function getItems($ItemIDs) {
 		$lastItem = null;
 		
     
-		while($row = $result->fetch_assoc()) //get it one by one
+		while($row = $result->fetch_assoc() && ($row["store_city"] == $location || $location == "All Cities")) //get it one by one
 		{
 			$Item = new Item();
 			
