@@ -264,7 +264,8 @@ function printItems($priceByStoreByItem) {
     
     echo "</thead>";
     echo "<tbody>";
-    
+ 
+    $totalPriceByStore = new PriceByStore();
   
 	foreach($priceByStoreByItem as $Item) {
 	    $priceByStore = $priceByStoreByItem[$Item];
@@ -288,9 +289,15 @@ function printItems($priceByStoreByItem) {
 			    if ($price == $minimumPrice) {
 			        echo " class =\"minimum-price\"";
 			    }
+
+                        if ($totalPriceByStore->offsetExists($Store)) {
+                          $totalPriceByStore[$Store] += $price;
 			} else {
-			    $price = "N/A";
+                          $totalPriceByStore[$Store] = $price;
 			}
+		    } else {
+			    $price = "N/A";
+		    }
 			
 		    echo ">".$price."</td>";
 		}
@@ -298,8 +305,29 @@ function printItems($priceByStoreByItem) {
 		echo "</tr>";
 	}
 	
-	echo "</tbody>";
-	echo "</table>";
+	?>
+        </tbody>
+        <tfoot>
+	<tr>
+	<th colspan="4">Store Total</th>
+	<?php
+	foreach($StoreSet as $Store){
+		echo "<th>".$Store->name."</th>";
+		echo "<th>".$Store->city."</th>";
+
+		if ($totalPriceByStore->offsetExists($Store)) {
+			$totalPrice = $totalPriceByStore[$Store];
+		} else {
+			$totalPrice = "N/A";
+		}
+
+                echo "<th>".$totalPrice."</th>";
+	}
+	?>
+	</tr>
+	</tfoot>
+	</table>
+<?php
 }
 
 function minimumPrice($priceByStore) {
