@@ -92,6 +92,42 @@ main();
 
 
 function main() {
+  
+      $City;
+        
+      echo "<div class=\"user-button\">";
+      echo "<form id=\"sorter\" method=\"post\" action=\"compare.php\">";
+      echo "<span class=\"sort\"><strong>Sort By City: </strong></span><select name=\"sorted\">";
+      $stmt = $mysqli->stmt_init();
+      $cty = "SELECT city FROM cs361_store WHERE id > -1 ORDER BY city";
+      $stmt->prepare($cty);
+      $stmt->execute();
+      $stmt->bind_result($City);
+
+      $array = array(100);
+      $cityCount = 0;
+      $include;
+      echo "<option value=\"All Stores\">All Stores</option>";
+      while($stmt->fetch()) {
+        $include = TRUE;
+        for($i = 0; $i < count($array); $i++) {
+          if($City == $array[$i]) {
+            $include = FALSE;
+          }
+        }
+        if($include == TRUE && $City != "") {
+          $array[$cityCount] = $City;
+          $cityCount++;
+          echo "<option value=\"" . $City . "\">" . $City . "</option>";
+        }
+      }
+      echo "</select>";
+      echo "<input type=\"submit\" value=\"Filter\"><br />";
+      echo "</form>";
+      echo "</div>";
+
+      $stmt->close();
+  
 	$ItemIDs= parseItemIDs(); // Get items passed from HTTP GET as an array
 	$priceByStoreByItem = getItems($ItemIDs); // Query database to get prices at different stores for each item
 	printItems($priceByStoreByItem); // Print out returned info as a demo how to use the data returned by function getItems
