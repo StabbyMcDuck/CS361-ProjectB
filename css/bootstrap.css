@@ -6170,3 +6170,10 @@ a.badge:focus {
   height: 100%;
   width: 100%;
 }
+
+/* Additional styling */
+.minimum-price {
+  background-color: #009407;
+  color: #FFFFFF;
+  padding: 5px;	
+}

@@ -142,6 +142,7 @@ function getItems($ItemIDs) {
 		
 		$lastItem = null;
 		
+    
 		while($row = $result->fetch_assoc()) //get it one by one
 		{
 			$Item = new Item();
@@ -201,6 +202,7 @@ function printItems($priceByStoreByItem) {
     echo "</thead>";
     echo "<tbody>";
     
+  
 	foreach($priceByStoreByItem as $Item) {
 	    $priceByStore = $priceByStoreByItem[$Item];
 		$minimumPrice = minimumPrice($priceByStore);
