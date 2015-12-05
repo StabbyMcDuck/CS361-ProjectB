@@ -188,7 +188,7 @@ function getItems($ItemIDs) {
       $tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
         . "FROM cs361_store "
         . "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
-        . "WHERE cs361_has.itemid = \"{$itemID}\" ";
+        . "WHERE cs361_has.itemid = \"{$itemID}\" AND cs361_store.city = \"{$_POST['sorted']}\" ";
       if (!($stmt = $mysqli->prepare($tableList))) {
         echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
       }
@@ -204,7 +204,7 @@ function getItems($ItemIDs) {
 
       while($row = $result->fetch_assoc()) //get it one by one
       {
-        if($row["store_city"] == $_POST['sorted']) { //Figure out why this isnt working
+        //if(strcmp ($row["store_city"], $_POST['sorted'])) { //Figure out why this isnt working
           $Item = new Item();
 
           $Store = new Store();
@@ -224,7 +224,7 @@ function getItems($ItemIDs) {
           $lastItem = $Item;
 
                 $priceByStore[$Store] = $price;			
-        }
+        //}
       }
 
       if ($lastItem !== null) {

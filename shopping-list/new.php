@@ -117,11 +117,11 @@ if ($mysqli->connect_errno) {
                   echo "</div>";
 
                   $stmt->close();
-              
+  
                 ?>
                 <h2>Enter Your Shopping List:</h2>
                 <p>You can select more than one item.  When you are done adding, hit the "Price Compare" button!</p>
-                <form action="http://web.engr.oregonstate.edu/~vidalj/CS361-ProjectB/item/compare.php">
+                <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
                     <div class="form-group">
                         <div class="col-lg-12">
                             <?php
