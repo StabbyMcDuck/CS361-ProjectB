@@ -18,6 +18,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+    <?php
         // wait for the DOM to be loaded
         $(document).ready(function() {
             var options = {
@@ -30,6 +31,7 @@
             };
             $('#form').ajaxForm(options);
         });
+        ?>
     </script>
 </head>
 
