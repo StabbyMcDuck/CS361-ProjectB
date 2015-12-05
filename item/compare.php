@@ -239,32 +239,45 @@ function getItems($ItemIDs) {
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
 */
 function printItems($priceByStoreByItem) {
-    echo "<table class=\"table table-striped\">";
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th rowspan='2'>Name</th>";
-    echo "<th rowspan='2'>Brand</th>";
-    echo "<th rowspan='2'>Size</th>";
-    echo "<th rowspan='2'>Unit</th>";
-    
+    ?>
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th colspan="4">City</th>
+    <?php
     $StoreSet = StoreSet($priceByStoreByItem);
     
     foreach($StoreSet as $Store){
-        echo "<th colspan='3'>Store</th>";
+        echo "<th>{$Store->city}</th>";
     }
-    echo "</tr>";
+    ?>
+    </tr>
+    <tr>
+    <th colspan="4">Name</th>
+    <?php
+    $StoreSet = StoreSet($priceByStoreByItem);
     
-    echo "<tr>";
     foreach($StoreSet as $Store){
-        echo "<th>Name</th>";
-        echo "<th>City</th>";
+        echo "<th>{$Store->name}</th>";
+    }
+    ?>
+    </tr>
+    <tr>
+    <th>Name</th>
+    <th>Brand</th>
+    <th>Size</th>
+    <th>Unit</th>
+    <?php
+    $StoreSet = StoreSet($priceByStoreByItem);
+    
+    foreach($StoreSet as $Store){
         echo "<th>Price</th>";
     }
-    echo "</tr>";
-    
-    echo "</thead>";
-    echo "<tbody>";
- 
+    ?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php 
     $totalPriceByStore = new PriceByStore();
   
 	foreach($priceByStoreByItem as $Item) {
@@ -278,9 +291,6 @@ function printItems($priceByStoreByItem) {
 		echo "<td>".$Item->unit."</td>";
 		
 		foreach($StoreSet as $Store){
-		    echo "<td>".$Store->name."</td>";
-		    echo "<td>".$Store->city."</td>";
-		    
 		    echo "<td";
 		    
 		    if ($priceByStore->offsetExists($Store)) {
@@ -312,9 +322,6 @@ function printItems($priceByStoreByItem) {
 	<th colspan="4">Store Total</th>
 	<?php
 	foreach($StoreSet as $Store){
-		echo "<th>".$Store->name."</th>";
-		echo "<th>".$Store->city."</th>";
-
 		if ($totalPriceByStore->offsetExists($Store)) {
 			$totalPrice = $totalPriceByStore[$Store];
 		} else {
