@@ -56,35 +56,37 @@
             ?>
             
             <div class="jumbotron">
-                <h1>Find cheap groceries!</h1>
-                <p class="lead">
+                <h1 class="text-center">Find cheap groceries!</h1>
+                <p class="lead text-center">
                     Enter your grocery list and we will show you the price of your items at 2 local grocery store chains, 
                     including where the best place to buy your groceries is! 
                 </p>
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-success" href="<?php echo $root_url ?>users/new.php" role="button">Sign up today!</a>
+                    <a class="btn btn-lg btn-success text-center center-block" href="<?php echo $root_url ?>users/new.php" role="button">Sign up today!</a>
                 </p>
                 
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-warning" href="<?php echo $root_url ?>session/new.php" role="button">Returning users login</a>
+                    <a class="btn btn-lg btn-warning text-center center-block" href="<?php echo $root_url ?>session/new.php" role="button">Returning users login</a>
                 </p>
             </div> <!-- jumbotron -->
             
             <div class="further-information">
-                <div class="col-lg-6">
+                <div class="col-lg-6 text-center">
                     <h4>What this system does:</h4>
                     <p>
                         This system takes your grocery shopping list and compares prices at two different grocery stores.
                     </p>
+                    
                     <br>
+                    
                     <p>
                         We then highlight the lowest price so you know where to do your shopping!
                     </p>
                 </div> <!-- col lg 6 -->
                 
-                <div class="col-lg-6">
+                <div class="col-lg-6 text-center">
                     <h4>How we do this:</h4>
                     <p>
                         We do this by allowing you, the customer, to enter prices of common items as you see them!
