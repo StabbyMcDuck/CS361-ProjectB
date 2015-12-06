@@ -78,7 +78,9 @@
                     <p>
                         This system takes your grocery shopping list and compares prices at two different grocery stores.
                     </p>
+                    
                     <br>
+                    
                     <p>
                         We then highlight the lowest price so you know where to do your shopping!
                     </p>
