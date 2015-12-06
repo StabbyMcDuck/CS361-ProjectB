@@ -81,12 +81,44 @@ if ($mysqli->connect_errno) {
             ?>
 
             <div class="item-entry">
+                
                 <h2>Enter Your Shopping List:</h2>
                 <p>You can select more than one item.  When you are done adding, hit the "Price Compare" button!</p>
-                <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
+              <form action="http://web.engr.oregonstate.edu/~imhoffr/CS361-ProjectB-master/item/compare.php">
+               <!--<form action="http://web.engr.oregonstate.edu/~vidalj/CS361-ProjectB/item/compare.php">-->
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <?php
+                          <h3>Where do you live?:</h3>
+                          <?php
+
+                            $location;
+                            echo "<span class=\"sort\"><strong>City: </strong></span><select name=\"sorted\">";
+                            $stmt = $mysqli->stmt_init();
+                            $cty = "SELECT city FROM cs361_store WHERE id > -1 ORDER BY city";
+                            $stmt->prepare($cty);
+                            $stmt->execute();
+                            $stmt->bind_result($location);
+
+                            $array = array(100);
+                            $cityCount = 0;
+                            $include;
+                            echo "<option value=\"All Cities\">All Cities</option>";
+                            while($stmt->fetch()) {
+                              $include = TRUE;
+                              for($i = 0; $i < count($array); $i++) {
+                                if($location == $array[$i]) {
+                                  $include = FALSE;
+                                }
+                              }
+                              if($include == TRUE && $location != "") {
+                                $array[$cityCount] = $location;
+                                $cityCount++;
+                                echo "<option value=\"" . $location . "\">" . $location . "</option>";
+                                }
+                              }
+                            echo "</select>";
+                            //$stmt->close();
+                          
                             $itemQuery = "SELECT id, brand, name, size, unit " .
                                          "FROM cs361_item " .
                                          "ORDER BY brand, name, size, unit";

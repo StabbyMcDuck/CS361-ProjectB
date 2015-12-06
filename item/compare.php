@@ -30,14 +30,6 @@ if ($mysqli->connect_errno) {
 
 <!DOCTYPE html>
 <html lang="en">
-    
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
- 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +39,13 @@ if ($mysqli->connect_errno) {
         <meta name="author" content="">
         
         <title>Grocery Shopper Price Chopper</title>
-        
+          
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         
@@ -73,6 +71,13 @@ if ($mysqli->connect_errno) {
             
         </style> <!-- end style-1-cropbar -->
 
+        <style>
+            .minimum-price {
+              background-color: green;
+              color: white;
+            }
+	</style>
+
     </head>
 
     
@@ -87,11 +92,12 @@ if ($mysqli->connect_errno) {
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-
+          
 main();
 
 
 function main() {
+  
 	$ItemIDs= parseItemIDs(); // Get items passed from HTTP GET as an array
 	$priceByStoreByItem = getItems($ItemIDs); // Query database to get prices at different stores for each item
 	printItems($priceByStoreByItem); // Print out returned info as a demo how to use the data returned by function getItems
@@ -120,87 +126,158 @@ function parseItemIDs() {
       name: bread, store: QFC, ....
 */
 function getItems($ItemIDs) {
-	global $mysqli;
-	$priceByStoreByItem = new PriceByStoreByItem();
-	
-	foreach($ItemIDs as $itemID) {
-		$priceByStore = new PriceByStore();
-		// For each item query db to get its price, etc in different stores
-		$tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
-			. "FROM cs361_store "
-			. "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
-			. "WHERE cs361_has.itemid = \"{$itemID}\" ";
-		if (!($stmt = $mysqli->prepare($tableList))) {
-			echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
-		}
-		if (!$stmt->execute()) {
-			echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
-		}
-		
-		// Create item object with values from db and add it to the array
-		$result = $stmt->get_result();
-		
-		$lastItem = null;
-		
-		while($row = $result->fetch_assoc()) //get it one by one
-		{
-			$Item = new Item();
-			
-			$Store = new Store();
-			
-			$Item->brand = $row["brand"];
-			$Item->size = $row["size"];
-			$Item->unit = $row["unit"];
-			$Item->name = $row["name"];
-			$Item->id = $row["id"];
-			
-			$Store->id = $row["store_id"];
-			$Store->name = $row["store_name"];
-			$Store->city = $row["store_city"];
-			
-			$price = $row["price"];
+  if(!isset($_GET['sorted']) || $_GET['sorted'] == "All Cities") {
+    global $mysqli;
+    $priceByStoreByItem = new PriceByStoreByItem();
 
-			$lastItem = $Item;
+    foreach($ItemIDs as $itemID) {
+      $priceByStore = new PriceByStore();
+      // For each item query db to get its price, etc in different stores
+      $tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
+        . "FROM cs361_store "
+        . "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
+        . "WHERE cs361_has.itemid = \"{$itemID}\" ";
+      if (!($stmt = $mysqli->prepare($tableList))) {
+        echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
+      }
+      if (!$stmt->execute()) {
+        echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+      }
 
-            $priceByStore[$Store] = $price;			
-		}
-		
-		if ($lastItem !== null) {
-		  $priceByStoreByItem[$lastItem] = $priceByStore;
-		}
-	}
-	return $priceByStoreByItem;
+      // Create item object with values from db and add it to the array
+      $result = $stmt->get_result();
+
+      $lastItem = null;
+
+
+      while($row = $result->fetch_assoc()) //get it one by one
+      {
+        $Item = new Item();
+
+        $Store = new Store();
+
+        $Item->brand = $row["brand"];
+        $Item->size = $row["size"];
+        $Item->unit = $row["unit"];
+        $Item->name = $row["name"];
+        $Item->id = $row["id"];
+
+        $Store->id = $row["store_id"];
+        $Store->name = $row["store_name"];
+        $Store->city = $row["store_city"];
+
+        $price = $row["price"];
+
+        $lastItem = $Item;
+
+              $priceByStore[$Store] = $price;			
+      }
+
+      if ($lastItem !== null) {
+        $priceByStoreByItem[$lastItem] = $priceByStore;
+      }
+    }
+    return $priceByStoreByItem;
+    } else {
+          global $mysqli;
+    $priceByStoreByItem = new PriceByStoreByItem();
+
+    foreach($ItemIDs as $itemID) {
+      $priceByStore = new PriceByStore();
+      // For each item query db to get its price, etc in different stores
+      $tableList = "SELECT cs361_store.id as store_id, cs361_store.city as store_city, cs361_store.name as store_name, cs361_item.name as name, cs361_item.brand, cs361_item.size, cs361_item.unit, cs361_item.id as id, cs361_has.price "
+        . "FROM cs361_store "
+        . "INNER JOIN cs361_item INNER JOIN cs361_has ON cs361_item.id = cs361_has.itemid AND cs361_store.id = cs361_has.storeid "
+        . "WHERE cs361_has.itemid = \"{$itemID}\" AND cs361_store.city = \"{$_GET['sorted']}\" ";
+      if (!($stmt = $mysqli->prepare($tableList))) {
+        echo "Error: Prepare failed: " . $stmt->errno . " " . $stmt->error;
+      }
+      if (!$stmt->execute()) {
+        echo "Error: Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+      }
+
+      // Create item object with values from db and add it to the array
+      $result = $stmt->get_result();
+
+      $lastItem = null;
+
+
+      while($row = $result->fetch_assoc()) //get it one by one
+      {
+          $Item = new Item();
+
+          $Store = new Store();
+
+          $Item->brand = $row["brand"];
+          $Item->size = $row["size"];
+          $Item->unit = $row["unit"];
+          $Item->name = $row["name"];
+          $Item->id = $row["id"];
+
+          $Store->id = $row["store_id"];
+          $Store->name = $row["store_name"];
+          $Store->city = $row["store_city"];
+
+          $price = $row["price"];
+
+          $lastItem = $Item;
+
+                $priceByStore[$Store] = $price;			
+      }
+
+      if ($lastItem !== null) {
+        $priceByStoreByItem[$lastItem] = $priceByStore;
+      }
+    }
+    return $priceByStoreByItem;
+    
+    }
 }
 
 /* This function is for demo purpose only. It will print item dictionary as a demo to retrieve its info. GroupA can modify this function to fit info into the actual UI
 */
 function printItems($priceByStoreByItem) {
-    echo "<table class=\"table table-striped\">";
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th rowspan='2'>Name</th>";
-    echo "<th rowspan='2'>Brand</th>";
-    echo "<th rowspan='2'>Size</th>";
-    echo "<th rowspan='2'>Unit</th>";
+    ?>
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th colspan="4">City</th>
+    <?php
+    $StoreSet = StoreSet($priceByStoreByItem);
+    foreach($StoreSet as $Store){
+        echo "<th>{$Store->city}</th>"; 
+    }
+    ?>
+    </tr>
+    <tr>
+    <th colspan="4">Name</th>
+    <?php
+    $StoreSet = StoreSet($priceByStoreByItem);
+  
     
+    foreach($StoreSet as $Store){
+        echo "<th>{$Store->name}</th>";
+    }
+    ?>
+    </tr>
+    <tr>
+    <th>Name</th>
+    <th>Brand</th>
+    <th>Size</th>
+    <th>Unit</th>
+    <?php
     $StoreSet = StoreSet($priceByStoreByItem);
     
     foreach($StoreSet as $Store){
-        echo "<th colspan='3'>Store</th>";
-    }
-    echo "</tr>";
-    
-    echo "<tr>";
-    foreach($StoreSet as $Store){
-        echo "<th>Name</th>";
-        echo "<th>City</th>";
         echo "<th>Price</th>";
     }
-    echo "</tr>";
-    
-    echo "</thead>";
-    echo "<tbody>";
-    
+    ?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php 
+    $totalPriceByStore = new PriceByStore();
+  
 	foreach($priceByStoreByItem as $Item) {
 	    $priceByStore = $priceByStoreByItem[$Item];
 		$minimumPrice = minimumPrice($priceByStore);
@@ -212,10 +289,6 @@ function printItems($priceByStoreByItem) {
 		echo "<td>".$Item->unit."</td>";
 		
 		foreach($StoreSet as $Store){
-		    echo "<td>".$Store->name."</td>";
-		    echo "<td>".$Store->city."</td>";
-		    
-		    echo "<!--".$minimumPrice."-->";
 		    echo "<td";
 		    
 		    if ($priceByStore->offsetExists($Store)) {
@@ -224,9 +297,15 @@ function printItems($priceByStoreByItem) {
 			    if ($price == $minimumPrice) {
 			        echo " class =\"minimum-price\"";
 			    }
+
+                        if ($totalPriceByStore->offsetExists($Store)) {
+                          $totalPriceByStore[$Store] += $price;
 			} else {
-			    $price = "N/A";
+                          $totalPriceByStore[$Store] = $price;
 			}
+		    } else {
+			    $price = "N/A";
+		    }
 			
 		    echo ">".$price."</td>";
 		}
@@ -234,8 +313,26 @@ function printItems($priceByStoreByItem) {
 		echo "</tr>";
 	}
 	
-	echo "</tbody>";
-	echo "</table>";
+	?>
+        </tbody>
+        <tfoot>
+	<tr>
+	<th colspan="4">Store Total</th>
+	<?php
+	foreach($StoreSet as $Store){
+		if ($totalPriceByStore->offsetExists($Store)) {
+			$totalPrice = $totalPriceByStore[$Store];
+		} else {
+			$totalPrice = "N/A";
+		}
+
+                echo "<th>".$totalPrice."</th>";
+	}
+	?>
+	</tr>
+	</tfoot>
+	</table>
+<?php
 }
 
 function minimumPrice($priceByStore) {
