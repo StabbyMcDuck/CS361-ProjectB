@@ -55,7 +55,7 @@
             printHeader("index.php");
             ?>
             
-            <div class="jumbotron">
+            <div class="jumbotron center-block">
                 <h1 class="text-center">Find cheap groceries!</h1>
                 <p class="lead text-center">
                     Enter your grocery list and we will show you the price of your items at 2 local grocery store chains, 
@@ -63,12 +63,12 @@
                 </p>
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-success text-center center-block" href="<?php echo $root_url ?>users/new.php" role="button">Sign up today!</a>
+                    <a class="btn btn-lg btn-success text-center" href="<?php echo $root_url ?>users/new.php" role="button">Sign up today!</a>
                 </p>
                 
                 <p>
                     <!-- FIX THE LINK FOR THE SIGN UP BUTTON!!!!!!!!!!! -->
-                    <a class="btn btn-lg btn-warning text-center center-block" href="<?php echo $root_url ?>session/new.php" role="button">Returning users login</a>
+                    <a class="btn btn-lg btn-warning text-center" href="<?php echo $root_url ?>session/new.php" role="button">Returning users login</a>
                 </p>
             </div> <!-- jumbotron -->
             
