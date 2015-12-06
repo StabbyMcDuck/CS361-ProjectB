@@ -76,6 +76,10 @@ if ($mysqli->connect_errno) {
               background-color: green;
               color: white;
             }
+            .minimum-total {
+                background-color: limegreen;
+                color: white;
+              }
 	</style>
 
     </head>
@@ -238,7 +242,7 @@ function getItems($ItemIDs) {
 */
 function printItems($priceByStoreByItem) {
     ?>
-    <table class="table table-striped">
+    <table class="table table">
     <thead>
     <tr>
     <th colspan="4">City</th>
@@ -319,14 +323,30 @@ function printItems($priceByStoreByItem) {
 	<tr>
 	<th colspan="4">Store Total</th>
 	<?php
-	foreach($StoreSet as $Store){
+  $minTotalPrice = 1000000000;
+  foreach($StoreSet as $Store){
+
 		if ($totalPriceByStore->offsetExists($Store)) {
 			$totalPrice = $totalPriceByStore[$Store];
+      $minTotalPrice = min($minTotalPrice, $totalPrice);   
+      
+		}   
+  }
+  
+	foreach($StoreSet as $Store){
+    echo "<th";
+    
+		if ($totalPriceByStore->offsetExists($Store)) {
+			$totalPrice = $totalPriceByStore[$Store];   
+      
+      if ($minTotalPrice == $totalPrice) {
+			        echo " class =\"minimum-total\"";
+			    }
 		} else {
 			$totalPrice = "N/A";
 		}
 
-                echo "<th>".$totalPrice."</th>";
+                echo ">".$totalPrice."</th>";
 	}
 	?>
 	</tr>
